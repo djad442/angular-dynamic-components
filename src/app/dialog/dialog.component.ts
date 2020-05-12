@@ -11,7 +11,7 @@ import { DialogRef } from './dialog-ref';
 export class DialogComponent implements AfterViewInit, OnDestroy {
   componentRef: ComponentRef<any>;
 
-  @ViewChild(InsertionDirective)
+  @ViewChild(InsertionDirective, { static: true })
   insertionPoint: InsertionDirective;
 
   private readonly _onClose = new Subject<any>();
@@ -27,7 +27,7 @@ export class DialogComponent implements AfterViewInit, OnDestroy {
   }
 
   onOverlayClicked(evt: MouseEvent) {
-    this.dialogRef.close();
+    //this.dialogRef.close();
   }
 
   onDialogClicked(evt: MouseEvent) {

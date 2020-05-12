@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { DialogService } from './dialog/dialog.service';
-import { ExampleComponent } from './example/example.component';
+import { ExampleComponent, ExampleData } from './example/example.component';
+import { DialogConfig } from './dialog/dialog-config';
+
 
 @Component({
   selector: 'app-root',
@@ -9,10 +11,19 @@ import { ExampleComponent } from './example/example.component';
 })
 export class AppComponent {
   constructor(public dialog: DialogService) {
-    const ref = this.dialog.open(ExampleComponent, { data: { message: 'I am a dynamic component inside of a dialog!' } });
+
+  }
+
+
+  showDialog(){
+    const data = new DialogConfig<ExampleData>();
+
+    data.data = { RID: 999};
+
+    const ref = this.dialog.open(ExampleComponent, data);
 
     ref.afterClosed.subscribe(result => {
-      console.log('Dialog closed', result);
+      alert("dialog closed result: " + result);
     });
   }
 }
